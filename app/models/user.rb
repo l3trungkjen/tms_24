@@ -1,13 +1,19 @@
 class User < ActiveRecord::Base
+  ROLE = %w(0 1)
+
   attr_accessor :remember_token
 
-  validates :name, presence: true, length: {maximum: 50}
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, length: {maximum: 255},
-                    format: {with: VALID_EMAIL_REGEX},
-                    uniqueness: {case_sensitive: false}
-  validates :password, length: {minimum: 8}
+  validates :name, presence: true, length: {minimum: 3, maximum: 25}
 
-  before_save {self.email = email.downcase}
-  has_secure_password
+  before_save :set_default
+
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  private
+  def set_default
+    self.email = email.downcase
+    self.role = ROLE.first
+  end
+
 end

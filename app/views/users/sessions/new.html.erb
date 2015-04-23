@@ -1,0 +1,13 @@
+<%= form_for resource, html: {class: "form-signin"}, url: user_session_path do |f| %>
+  <h1>Login</h1>
+  <%= f.email_field :email, class: "form-control", autofocus: true, placeholder: "Input email..." %>
+  <%= f.password_field :password, class: "form-control", autocomplete: "off", placeholder: "Input password..." %>
+  <% if devise_mapping.rememberable? %>
+    <%= f.label :remember_me do %>
+      <%= f.check_box :remember_me %>
+      <%= content_tag :span, "Remember me on this computer"  %>
+    <% end %>
+  <% end %>
+  <%= f.submit "Sign in", class: "btn btn-lg btn-primary btn-block" %>
+<% end %>
+<%= render "users/shared/links" %>
