@@ -1,0 +1,10 @@
+<div class="bs-callout bs-callout-info">
+  <h4><%= @course.name %></h4>
+</div>
+<div class="row">
+  <% @subjects.each do |subject| %>
+    <div class="col-md-3">
+      <h2><%= link_to subject.name, course_subject_path(course_id: @course.id, id: subject.id) %></h2>
+    </div>
+  <% end %>
+</div>
