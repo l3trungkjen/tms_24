@@ -1,4 +1,3 @@
 class StaticPagesController < ApplicationController
-  def home
-  end
+  before_action :authenticate_user!
 end

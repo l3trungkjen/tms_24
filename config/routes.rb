@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
-
+  resources :courses, only: [:index, :show] do
+    resources :subjects
+  end
   devise_for :users, controllers: {sessions: 'users/sessions', registrations: 'users/registrations'}
   devise_scope :user do
     get 'sign_in', to: 'users/sessions#new'
     get 'sign_out', to: 'users/sessions#destroy'
   end
-  root 'static_pages#home'
+  root 'courses#show'
+  # match 'courses/show/:id' => 'courses#show', :as => :root
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with 'rake routes'.
 

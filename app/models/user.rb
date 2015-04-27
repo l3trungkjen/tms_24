@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
 
   attr_accessor :remember_token
 
+  has_many :user_courses, dependent: :destroy
+  has_many :courses, through: :user_courses
+
   validates :name, presence: true, length: {minimum: 3, maximum: 25}
 
   before_save :set_default
