@@ -1,0 +1,45 @@
+<h1 class="text-left">Profile</h1>
+<table class="table table-bordered">
+  <tbody>
+  <tr>
+    <td rowspan="3" align="center">Image</td>
+  </tr>
+  <tr>
+    <td>name</td>
+    <td><%= current_user.name %></td>
+  </tr>
+  <tr>
+    <td>email</td>
+    <td><%= current_user.email %></td>
+  </tr>
+  </tbody>
+</table>
+<div class="row">
+  <div class="row-same-height">
+    <div class="col-xs-2 col-xs-height">course: <span class="color-text"><%= @course.name %></span></div>
+    <div class="col-xs-6 col-xs-height">start date: <span class="color-text">(<%= @course.created_at.strftime "%F" %>)</span></div>
+  </div>
+</div>
+<div class="row">
+  <% @subjects.each do |subject| %>
+    <div class="row-same-height">
+      <div class="col-xs-3 col-xs-height"><%= subject.name %></div>
+      <div class="col-xs-6 col-xs-height col-top">start date: <span class="color-text">(<%= subject.created_at.strftime "%F" %>)</span></div>
+      <div class="col-xs-3 col-xs-height col-middle">
+        <% subject.user_subjects.each do |us| %>
+          <% if us.subject_id == subject.id %>
+            <%= image_tag us.status == 0 ? "train.png" : "finish.png" %>
+          <% end %>
+        <% end %>
+      </div>
+      <% Task.list_task(subject).each do |task| %>
+        <div class="col-xs-6 col-xs-height"><%= task.name %></div>
+        <div class="col-xs-6 col-xs-height">
+          <% task.user_tasks.each do |ut| %>
+            <%= image_tag ut.status == 0 ? "train.png" : "finish.png" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
