@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'profile', to: 'users#show'
+
   resources :courses, only: [:index, :show] do
     resources :subjects
   end
@@ -7,6 +9,7 @@ Rails.application.routes.draw do
     get 'sign_in', to: 'users/sessions#new'
     get 'sign_out', to: 'users/sessions#destroy'
   end
+  
   root 'courses#show'
   # match 'courses/show/:id' => 'courses#show', :as => :root
   # The priority is based upon order of creation: first created -> highest priority.
