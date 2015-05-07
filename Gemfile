@@ -24,6 +24,9 @@ group :development, :test do
   gem 'web-console', '2.0.0.beta3'
   gem 'spring',      '1.1.3'
   gem 'pry'
+  gem 'rspec', '3.0'
+  gem 'faker',        '1.4.2'
+  gem 'factory_girl_rails'
 end
 
 group :test do
@@ -36,3 +39,4 @@ group :production do
   gem 'rails_12factor', '0.0.2'
   gem 'puma',           '2.11.1'
 end
+gem "rspec-rails", :group => [:development, :test]
