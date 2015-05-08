@@ -1,0 +1,24 @@
+<%= form_for [@course, @subject] do |f| %>
+  <div class="bs-callout bs-callout-info">
+    <h4><%= @subject.name %></h4>
+  </div>
+  <div class="color-swatches">
+    <%= f.fields_for :tasks do |f_task| %>
+      <div class="color-swatch brand-success">
+        <%= f_task.object.name %><br>
+        <span class="checkbox-finish">
+          <%= f_task.fields_for :user_tasks do |f_user_task| %>
+            <%= f_user_task.hidden_field :user_id, value: current_user.id %>
+              <%= f_user_task.check_box :status, class: "cbx_width", disabled: f_user_task.object.status? %>
+              Finish
+          <% end %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+  <%= f.submit "Update", class: "btn btn-primary" %>
+  <div class="bs-callout bs-callout-info">
+    <h4>Instruction</h4>
+  </div>
+  <div><%= @subject.description %></div>
+<% end %>
